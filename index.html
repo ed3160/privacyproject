@@ -15,17 +15,22 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="kicker">A data story about fitness apps and privacy</p>
         <h1>This is Millie.<br />She went for a run.</h1>
-        <p class="byline">By Iqra, Rachel &amp; Esha · Privacy in a Networked World · Columbia University / Barnard College</p>
-        <p class="hero-question">
-          Millie posted one run. We wanted to see how much a stranger could figure out about her from it, and what she could do to limit that.
-        </p>
       </div>
       <div class="cover" id="cover"></div>
     </div>
     <p class="scroll-cue" aria-hidden="true">Scroll to follow her <span>↓</span></p>
   </header>
+
+  <section class="intro" id="intro" aria-label="About this project">
+    <div class="intro-inner">
+      <p class="kicker">A data story about fitness apps and privacy</p>
+      <p class="hero-question">
+        Millie is a Barnard student who posts her runs using an app called Strava. Our team was interested in seeing how much information is exposed to a stranger from her usage of the Strava app, and what measures can Millie take in order to protect herself.
+      </p>
+      <p class="byline"><span class="who">Who we are:</span> By Iqra Waheed, Rachel Boroda &amp; Esha Dasari · Privacy in a Networked World · Columbia University / Barnard College</p>
+    </div>
+  </section>
 
   <main id="story">
     <section class="scrolly" aria-label="The story">
@@ -84,12 +89,12 @@
           </div>
         </div>
         <div class="step" data-scene="run" data-run-from="0" data-run-to="0.28">
-          <p>It’s Thursday at 7:04 a.m. Millie starts her run on Broadway by Barnard and heads west on 116th Street toward the river. Her watch records her location every second or two. When she saves the run, Strava’s default settings make it visible to <strong>everyone</strong>.</p>
+          <p>It’s Thursday at 7:04 a.m. Millie starts her run on Broadway by Barnard and heads west on 116th Street toward the river. Her watch records her location every second or two <a class="cite" href="#ref-strava-interval">(Strava, n.d.-i)</a>. When she saves the run, Strava’s default settings make it visible to <strong>everyone</strong>.</p>
           <div class="claim-slot" data-claim="run-route"></div>
           <p class="sr-only">Map: Morningside Heights in Manhattan. A dot moves west from Broadway along 116th Street into Riverside Park.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.28" data-run-to="0.5">
-          <p>She goes into Riverside Park and turns north.</p>
+          <p>She goes into Riverside Park and turns north. This is a normal run, and everything on the map is something that Strava will show on her profile when she decides to post this run.</p>
           <p class="sr-only">Map: the dot travels north through Riverside Park, then east along West 122nd Street.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.5" data-run-to="0.75">
@@ -97,7 +102,8 @@
           <p class="sr-only">Map: the dot heads south on Amsterdam Avenue and into Morningside Park.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.75" data-run-to="1">
-          <p>She takes the stairs down into Morningside Park, the steepest part of the loop, and finishes back on Broadway: <strong data-ev="hero.distance_km"></strong> km in <strong data-ev="hero.time"></strong>. Next, we look at what a stranger could learn from runs like this one.</p>
+          <p>She takes the stairs down into Morningside Park, the steepest part of the loop, and finishes back on Broadway: <strong data-ev="hero.distance_km"></strong> km in <strong data-ev="hero.time"></strong>.</p>
+          <p class="isolated">Next, we look at what a stranger could learn from runs like this one.</p>
           <p class="sr-only">Map: the completed loop, from Barnard through Riverside Park, Amsterdam Avenue and Morningside Park, back to Broadway.</p>
         </div>
 
@@ -185,9 +191,10 @@
           <h2>Who she is</h2>
         </div>
         <div class="step" data-scene="identity">
-          <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The Brooklyn high school on that profile adds context to the hometown she lists on her fitness profile.</p>
+          <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The high school on that profile is Midwood High School in Brooklyn, New York. It is a real school, and it adds context to the hometown she lists on her fitness profile.</p>
           <p class="sr-only">Professional profile details. High school: <span data-ev="professional.high_school.name"></span>, <span data-ev="professional.high_school.location"></span>. Internships: <span data-ev="professionalExperience"></span>. Skills: <span data-ev="professionalSkills"></span>.</p>
           <div class="claim-slot" data-claim="id-join"></div>
+          <div class="claim-slot" data-claim="id-school-area"></div>
         </div>
         <div class="step" data-scene="identity">
           <p>A follower count also tells you very little about who is in the audience. Millie recognizes most of her followers, and the profiles of the two unfamiliar accounts give her little information.</p>
@@ -209,8 +216,8 @@
       <div class="norm">
         <h3>Where she starts and ends</h3>
         <div class="norm-cols">
-          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect</p><p>“I’m sharing where I ran with other runners. It shows my route, not where I live.”</p></div>
-          <div class="norm-col norm-break"><p class="norm-k">How that breaks</p><p>Run after run starts and ends on the same block. Even with the first and last 200 m hidden, the gap in the track points back to that block.</p></div>
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect in theory</p><p>“I’m sharing where I ran with other runners. It shows my route, not where I live.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">What is exposed in practice</p><p>Run after run starts and ends on the same block. Even with the first and last 200 m hidden, the gap in the track points back to that block.</p></div>
         </div>
         <aside class="setting" data-setting="norm-home"></aside>
       </div>
@@ -218,8 +225,8 @@
       <div class="norm">
         <h3>When she runs</h3>
         <div class="norm-cols">
-          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect</p><p>“My workout times are for friends comparing training, not for anyone tracking when I’m out.”</p></div>
-          <div class="norm-col norm-break"><p class="norm-k">How that breaks</p><p>Timestamps repeat on a weekly rhythm, so a stranger can tell when she’s probably outside, and a gap can show when she’s away.</p></div>
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect in theory</p><p>“My workout times are for friends comparing training, not for anyone tracking when I’m out.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">What is exposed in practice</p><p>Timestamps repeat on a weekly rhythm, so a stranger can tell when she’s probably outside, and a gap can show when she’s away.</p></div>
         </div>
         <aside class="setting" data-setting="norm-routine"></aside>
       </div>
@@ -227,8 +234,14 @@
       <div class="norm">
         <h3>Who she is</h3>
         <div class="norm-cols">
-          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect</p><p>“A fitness profile stays in a fitness context. Nobody should be able to connect it to my school or my career.”</p></div>
-          <div class="norm-col norm-break"><p class="norm-k">How that breaks</p><p>A public bio that names her school and year, plus a neighbourhood she runs in every week, is enough to link her fitness profile to other pages about her.</p></div>
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect in theory</p><p>“No one would care enough about me to go into all of this. So what if someone knows I’m a pre-med from Brooklyn and I attend Barnard College? It’s not like I’m a celebrity.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">What is exposed in practice</p>
+            <p>Knowing your career interests lets someone personalize a scam. A caller can claim to be about a pre-med internship you applied to, or a nearby clinic that is looking for a student like you and just needs a little more information.</p>
+            <ul class="scam-list">
+              <li><strong>Spear phishing.</strong> Instead of generic spam, attackers write emails that mention your exact dream industry or role. If you post about wanting to be a graphic designer or software engineer, you might get a fake email offering an exclusive paid internship or a free software license that actually installs malware.</li>
+              <li><strong>Advance-fee fraud.</strong> Bad actors prey on career ambition by posing as talent scouts, certification boards or industry mentors. They may ask for upfront fees for fake training courses, portfolio reviews or background checks for a job that does not exist.</li>
+            </ul>
+          </div>
         </div>
         <aside class="setting" data-setting="norm-identity"></aside>
       </div>
@@ -326,7 +339,7 @@
           <p class="fb-small">Opens Google Forms in a new tab.</p>
         </div>
         <figure class="qr">
-          <img src="/feedback-qr.svg" width="180" height="180" alt="QR code that opens the anonymous feedback form" />
+          <img src="/feedback-qr.png" width="180" height="180" alt="QR code that opens the anonymous feedback form" />
           <figcaption>Scan to open the form</figcaption>
         </figure>
       </div>
