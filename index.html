@@ -46,6 +46,26 @@
             <div id="routine-cal"></div>
           </div>
         </div>
+        <div class="layer layer-chart" id="layer-identity">
+          <div class="story-visual">
+            <div class="story-card">
+              <h3>Fitness profile</h3>
+              <p class="story-match"><span data-ev="profile.display_name"></span><br><span data-ev="profile.school"></span></p>
+              <p data-ev="profile.hometown"></p>
+              <p><span data-ev="followers.total"></span> followers · <span data-ev="followers.unrecognized"></span> unfamiliar to Millie</p>
+            </div>
+            <div class="story-card">
+              <h3>Professional profile</h3>
+              <p class="story-match"><span data-ev="professional.name"></span><br><span data-ev="professional.school"></span> · Class of <span data-ev="professional.class_year"></span></p>
+              <p data-ev="professional.degree"></p>
+              <dl class="story-profile-details">
+                <div><dt>High school</dt><dd><span data-ev="professional.high_school.name"></span> · <span data-ev="professional.high_school.location"></span></dd></div>
+                <div><dt>Internships</dt><dd data-ev="professionalExperience"></dd></div>
+                <div><dt>Skills</dt><dd data-ev="professionalSkills"></dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
       </figure>
 
       <div class="steps">
@@ -69,7 +89,7 @@
           <p class="sr-only">Map: Morningside Heights in Manhattan. A dot moves west from Broadway along 116th Street into Riverside Park.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.28" data-run-to="0.5">
-          <p>She goes into Riverside Park and turns north. This is a normal run, and everything on the map is something Millie chose to post.</p>
+          <p>She goes into Riverside Park and turns north.</p>
           <p class="sr-only">Map: the dot travels north through Riverside Park, then east along West 122nd Street.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.5" data-run-to="0.75">
@@ -160,6 +180,20 @@
         <div class="step step-setting" data-scene="routine-cal">
           <aside class="setting" data-setting="activity-visibility"></aside>
         </div>
+        <div class="section-head" id="identity">
+          <p class="section-num">4</p>
+          <h2>Who she is</h2>
+        </div>
+        <div class="step" data-scene="identity">
+          <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The Brooklyn high school on that profile adds context to the hometown she lists on her fitness profile.</p>
+          <p class="sr-only">Professional profile details. High school: <span data-ev="professional.high_school.name"></span>, <span data-ev="professional.high_school.location"></span>. Internships: <span data-ev="professionalExperience"></span>. Skills: <span data-ev="professionalSkills"></span>.</p>
+          <div class="claim-slot" data-claim="id-join"></div>
+        </div>
+        <div class="step" data-scene="identity">
+          <p>A follower count also tells you very little about who is in the audience. Millie recognizes most of her followers, and the profiles of the two unfamiliar accounts give her little information.</p>
+          <div class="claim-slot" data-claim="id-followers"></div>
+          <aside class="setting" data-setting="profile-visibility"></aside>
+</div>
         <div class="step step-end">
           <p class="next-up">Each run is a dot. A year of runs is a profile. Next: what Millie would expect from sharing these runs, and what actually happens.</p>
         </div>
@@ -168,7 +202,7 @@
 
     <!-- 4. EXPECTATIONS VS REALITY ---------------------------------------->
     <section class="chapter" id="norms" aria-labelledby="norms-h">
-      <p class="section-num">4</p>
+      <p class="section-num">5</p>
       <h2 id="norms-h">What she’d expect, and what happens</h2>
       <p class="chapter-lede">Privacy researchers call this <em>contextual integrity</em>: information comes with unwritten rules about where it’s meant to go <a class="cite" href="#ref-nissenbaum2004">(Nissenbaum, 2004)</a>. We can’t know exactly what every Strava user expects, so the left column is our best guess at a reasonable norm. The right column is what the data lets a stranger do.</p>
 
@@ -202,7 +236,7 @@
 
     <!-- 5. PIECES THAT ADD UP ---------------------------------------------->
     <section class="chapter" id="aggregate" aria-labelledby="agg-h">
-      <p class="section-num">5</p>
+      <p class="section-num">6</p>
       <h2 id="agg-h">Small facts that add up</h2>
       <p class="chapter-lede">None of these facts is sensitive by itself. Together they narrow a crowd down to a few people <a class="cite" href="#ref-sweeney2000">(Sweeney, 2000)</a> <a class="cite" href="#ref-ohm2010">(Ohm, 2010)</a>.</p>
 
@@ -231,7 +265,7 @@
 
     <!-- 6. CAMERAS ----------------------------------------------------------->
     <section class="chapter" id="cameras" aria-labelledby="cam-h">
-      <p class="section-num">6</p>
+      <p class="section-num">7</p>
       <h2 id="cam-h">What public cameras could add</h2>
       <p class="chapter-lede">Strava data says where a runner was and when. A public camera records who was at a place and when. Put together, they could connect a name and a face to a route.</p>
 
@@ -268,9 +302,21 @@
       <p class="no-demo"><strong>Why there is no demo.</strong> We chose not to show a camera match. Doing it with real footage could help someone target a real person, so we describe it here and leave it out of the site. Our report explains this choice.</p>
     </section>
 
+    <section class="prose privacy-summary" id="privacy-settings">
+      <p class="section-num">8</p>
+      <h2>What you can change</h2>
+      <p>Start with the detail you want to share less widely.</p>
+      <dl class="levels">
+        <div><dt>Route endpoints</dt><dd>Use <strong>Map Visibility</strong> to hide endpoints, a nearby address or the entire map. Check older activities individually. <a class="cite" href="#ref-strava-map">Map Visibility</a></dd></div>
+        <div><dt>Routine and activity history</dt><dd>Set <strong>Activity Visibility</strong> to Followers or Only You. Use <strong>Hidden Details</strong> to hide the exact start time. The activity date stays visible to its audience. <a class="cite" href="#ref-strava-activity">Activity Visibility</a> · <a class="cite" href="#ref-strava-hidden">Hidden Details</a></dd></div>
+        <div><dt>Profile and followers</dt><dd>Set <strong>Profile Page</strong> to Followers to approve new requests. Review existing followers and the information visible on your other profiles. <a class="cite" href="#ref-strava-profile">Profile Page</a></dd></div>
+        <div><dt>Heart rate and pace</dt><dd>Choose what to hide under <strong>Hidden Details</strong>. Check older activities separately when you change the defaults. <a class="cite" href="#ref-strava-hidden">Hidden Details</a></dd></div>
+      </dl>
+    </section>
+
     <!-- 7. FEEDBACK ---------------------------------------------------------->
     <section class="chapter feedback" id="feedback" aria-labelledby="fb-h">
-      <p class="section-num">7</p>
+      <p class="section-num">9</p>
       <h2 id="fb-h">Help us make this clearer</h2>
       <div class="feedback-grid">
         <div>
@@ -293,7 +339,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>All people and profiles are fictional. Mockups are our own designs and are not affiliated with Strava or LinkedIn. Map data © OpenStreetMap contributors. This site uses no analytics, cookies or trackers.</p>
+    <p>All people and profiles are fictional. Mockups are our own designs and are not affiliated with Strava. Map data © OpenStreetMap contributors. This site uses no analytics, cookies or trackers.</p>
   </footer>
 
   <button type="button" class="refs-fab" id="refs-fab" data-drawer="references" aria-label="References" aria-controls="drawer">

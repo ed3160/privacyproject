@@ -80,6 +80,9 @@ const SETTINGS_COPY = {
   'camera': (s, cite) => `
     <p><strong>Hide start &amp; end, or Activity visibility → Followers.</strong></p>
     <p>Hiding the start and end blurs the place. Setting activities to Followers limits who sees the time. Neither one removes a camera’s own footage.${cite(['strava-map', 'strava-defaults'])}</p>`,
+  'profile-visibility': (s, cite) => `
+    <p><strong>Profile Page → Followers.</strong></p>
+    <p>New followers need approval. Review existing followers separately. Some profile details, including the bio, can still be visible to other Strava users.${cite(['strava-profile'])}</p>`,
 };
 
 // ---- plain-language terms (shown inline in Part 2 and in the sidebar) ----

@@ -10,9 +10,10 @@ const load = (f) => fetch(`${import.meta.env.BASE_URL}data/${f}`).then((r) => {
   return r.json();
 });
 
-const [claimsDoc, refs, profile, actsDoc, hero, routes, settings] = await Promise.all([
+const [claimsDoc, refs, profile, actsDoc, hero, routes, settings, professional, followers] = await Promise.all([
   load('claims.json'), load('references.json'), load('profile.json'), load('activities.json'),
   load('hero-run.json'), load('routes.geojson'), load('settings-defaults.json'),
+  load('pro-profile.json'), load('followers.json'),
 ]);
 const heroAct = actsDoc.activities.find((a) => a.id === hero.activity_id);
 
@@ -25,7 +26,12 @@ renderSettings(settings, refs);
 renderTerms(refs);
 renderLabelsPanel();
 renderBadges();
-fillEvidence(claimsDoc.evidence);
+fillEvidence({
+  ...claimsDoc.evidence, profile, professional,
+  professionalExperience: professional.experience.map(({ title, org }) => `${title} at ${org}`).join('\n'),
+  professionalSkills: professional.skills.join(', '),
+  followers: { total: followers.length, unrecognized: followers.filter((f) => !f.recognized).length },
+});
 renderReferences(refs, document.getElementById('ref-list'));
 renderReferences(refs, document.getElementById('drawer-refs'), 'dref-');
 
@@ -142,13 +148,18 @@ new IntersectionObserver((entries, obs) => {
 }, { rootMargin: '150% 0px' }).observe(document.getElementById('routine'));
 
 // ---- scenes ----
-const layers = { map: document.getElementById('layer-map'), routine: document.getElementById('layer-routine') };
+const layers = Object.fromEntries(['map', 'routine', 'identity']
+  .map((name) => [name, document.getElementById(`layer-${name}`)]));
 function showLayer(name) {
   for (const [k, el] of Object.entries(layers)) el.classList.toggle('is-active', k === name);
 }
 async function enterScene(step, direction) {
   const scene = step.dataset.scene;
   if (!scene) return;
+  if (scene === 'identity') {
+    showLayer('identity');
+    return;
+  }
   if (scene.startsWith('routine-')) {
     showLayer('routine');
     readout.hidden = true;
