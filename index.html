@@ -47,22 +47,39 @@
           </div>
         </div>
         <div class="layer layer-chart" id="layer-identity">
-          <div class="story-visual">
-            <div class="story-card">
-              <h3>Fitness profile</h3>
-              <p class="story-match"><span data-ev="profile.display_name"></span><br><span data-ev="profile.school"></span></p>
-              <p data-ev="profile.hometown"></p>
-              <p><span data-ev="followers.total"></span> followers · <span data-ev="followers.unrecognized"></span> unfamiliar to Millie</p>
-            </div>
-            <div class="story-card">
+          <div class="story-visual" id="identity-visual">
+            <div class="story-card card-pro">
               <h3>Professional profile</h3>
-              <p class="story-match"><span data-ev="professional.name"></span><br><span data-ev="professional.school"></span> · Class of <span data-ev="professional.class_year"></span></p>
+              <p class="story-match"><span class="m" data-ev="professional.name"></span><br><span class="m" data-ev="professional.school"></span> · Class of <span data-ev="professional.class_year"></span></p>
               <p data-ev="professional.degree"></p>
               <dl class="story-profile-details">
                 <div><dt>High school</dt><dd><span data-ev="professional.high_school.name"></span> · <span data-ev="professional.high_school.location"></span></dd></div>
                 <div><dt>Internships</dt><dd data-ev="professionalExperience"></dd></div>
                 <div><dt>Skills</dt><dd data-ev="professionalSkills"></dd></div>
               </dl>
+            </div>
+            <div class="story-card card-fit">
+              <h3>Fitness profile</h3>
+              <p class="story-match"><span class="m" data-ev="profile.display_name"></span><br><span class="m" data-ev="profile.school"></span></p>
+              <p class="solo" data-ev="profile.hometown"></p>
+              <p class="solo row-followers"><span data-ev="followers.total"></span> followers · <span data-ev="followers.unrecognized"></span> unfamiliar to Millie</p>
+            </div>
+            <p class="match-tag" aria-hidden="true"><b>2 matches</b> name and college</p>
+            <span class="pol-feed pol-feed-l" aria-hidden="true"></span><span class="pol-feed pol-feed-r" aria-hidden="true"></span>
+            <!-- what the overlap adds up to: one profile built from both profiles and a year of runs -->
+            <div class="pol" id="pol">
+              <p class="pol-kicker">Pieced together from 2 public profiles</p>
+              <h3 class="pol-title">Pattern of life: <span data-ev="profile.display_name"></span></h3>
+              <table>
+                <tbody>
+                  <tr><th>Name</th><td><span data-ev="profile.display_name"></span></td><td class="pol-src">Fitness · Professional</td><td><span class="badge" data-level="observed"></span></td></tr>
+                  <tr><th>School</th><td><span data-ev="profile.school"></span>, class of <span data-ev="professional.class_year"></span></td><td class="pol-src">Fitness · Professional</td><td><span class="badge" data-level="observed"></span></td></tr>
+                  <tr><th>Age</th><td>About 20 or 21</td><td class="pol-src">Class year</td><td><span class="badge" data-level="inferred"></span></td></tr>
+                  <tr><th>Studies</th><td><span data-ev="professional.degree"></span></td><td class="pol-src">Professional</td><td><span class="badge" data-level="observed"></span></td></tr>
+                  <tr><th>Grew up</th><td><span data-ev="profile.hometown"></span></td><td class="pol-src">Fitness · Professional</td><td><span class="badge" data-level="observed"></span></td></tr>
+                  <tr class="row-followers-pol"><th>Followers</th><td><span data-ev="followers.total"></span>, <span data-ev="followers.unrecognized"></span> she doesn’t recognize</td><td class="pol-src">Fitness</td><td><span class="badge" data-level="observed"></span></td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -173,14 +190,16 @@
           <p class="section-num">4</p>
           <h2>Who she is</h2>
         </div>
-        <div class="step" data-scene="identity">
+        <div class="step" data-scene="identity-match">
           <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The Brooklyn high school on that profile adds context to the hometown she lists on her fitness profile.</p>
           <p class="sr-only">Professional profile details. High school: <span data-ev="professional.high_school.name"></span>, <span data-ev="professional.high_school.location"></span>. Internships: <span data-ev="professionalExperience"></span>. Skills: <span data-ev="professionalSkills"></span>.</p>
           <div class="claim-slot" data-claim="id-join"></div>
         </div>
-        <div class="step" data-scene="identity">
+        <div class="step" data-scene="identity-followers">
           <p>A follower count also tells you very little about who is in the audience. Millie recognizes most of her followers, and the profiles of the two unfamiliar accounts give her little information.</p>
           <div class="claim-slot" data-claim="id-followers"></div>
+        </div>
+        <div class="step step-setting" data-scene="identity-followers">
           <aside class="setting" data-setting="profile-visibility"></aside>
         </div>
       </div>

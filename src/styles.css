@@ -228,17 +228,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   opacity: 0.35; transition: opacity 350ms ease;
 }
 .step-inner { position: sticky; top: 50%; transform: translateY(-50%); }
+/* Part 4's first step carries the profile merge + table, so it holds longer */
+.step[data-scene="identity-match"] { min-height: 340vh; min-height: 340svh; }
 .step.is-active { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .step { transition: none; } }
 .step-inner > * { position: relative; }
 .step p { margin: 0 0 12px; font: 400 1.22rem/1.6 var(--serif); }
 .step p:last-child { margin-bottom: 0; }
 
-@media (min-width: 861px) {
-  #identity { min-height: 52vh; min-height: 52svh; }
-  .step[data-scene="identity"] { min-height: 68vh; min-height: 68svh; padding: 0; }
-  .step[data-scene="identity"] .step-inner { padding-bottom: 24px; transform: none; }
-}
 
 .readout {
   position: absolute; left: 16px; bottom: 36px; z-index: 3;
@@ -266,7 +263,74 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .axis text, .chart-label { font: 400 11px/1 var(--sans); fill: var(--ink-3); }
 .axis path, .axis line { stroke: var(--rule); }
 .chart-note { font-size: 0.78rem; color: var(--ink-3); margin: 6px 0 0; }
-.story-visual { display: grid; gap: 12px; width: min(100%, 32rem); }
+/* Part 4: --m slides the profiles together, --s parts them again small at the top, --t brings in the table */
+.story-visual { --m: 0; --s: 0; --t: 0; --w: min(21rem, 44%); --k: 0.55; position: relative; width: min(100%, 48rem); height: min(44rem, 92vh); }
+.story-visual .story-card {
+  position: absolute; top: 2.5rem; left: 50%; width: var(--w); margin-left: calc(var(--w) / -2);
+  transform-origin: 50% 0;
+  transition: border-color 300ms ease;
+}
+.card-pro {
+  z-index: 1;
+  transform:
+    translateX(calc((1 - var(--m)) * 56% + var(--s) * 54%))
+    translateY(calc(var(--m) * (1 - var(--s)) * 10px))
+    rotate(calc((1 - var(--m)) * 2.5deg + var(--m) * (1 - var(--s)) * 1.5deg))
+    scale(calc(1 - var(--s) * (1 - var(--k))));
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 10px 28px rgb(0 0 0 / 0.06);
+}
+.card-fit {
+  z-index: 2;
+  transform:
+    translateX(calc((1 - var(--m)) * -56% - var(--s) * 54%))
+    rotate(calc((1 - var(--m)) * -2.5deg - var(--m) * (1 - var(--s)) * 1deg))
+    scale(calc(1 - var(--s) * (1 - var(--k))));
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 10px 28px rgb(0 0 0 / 0.08);
+}
+.story-visual.is-merged .card-fit { border-color: var(--millie); }
+.story-visual .m { border-radius: 4px; padding: 0 2px; margin: 0 -2px; transition: background-color 400ms ease, color 400ms ease; }
+.story-visual.is-merged .m, .story-visual.has-table .m { background: var(--millie-soft); color: #7d2550; }
+.match-tag {
+  position: absolute; left: 50%; top: 2.5rem; transform: translate(-50%, -60%) scale(0.92);
+  margin: 0; z-index: 3; white-space: nowrap;
+  font: 400 0.82rem/1 var(--sans); color: #7d2550; background: var(--millie-soft);
+  border: 1px solid #e7a9c4; border-radius: 999px; padding: 8px 14px;
+  opacity: 0; transition: opacity 300ms ease, transform 300ms ease;
+}
+.match-tag b { font-weight: 700; margin-right: 4px; }
+.story-visual.is-merged .match-tag { opacity: 1; transform: translate(-50%, -60%); }
+/* dotted lines from each small profile down into the table */
+.pol-feed {
+  position: absolute; top: calc(2.5rem + 6.5rem); height: 6rem; width: 0; z-index: 0;
+  border-left: 2px dashed #e7a9c4; opacity: var(--t);
+}
+.pol-feed-l { left: calc(50% - var(--w) * 0.54); }
+.pol-feed-r { left: calc(50% + var(--w) * 0.54); }
+
+/* the combined profile */
+.pol {
+  position: absolute; left: 50%; top: calc(2.5rem + 12.5rem); z-index: 4; width: min(100%, 34rem);
+  transform: translate(-50%, calc((1 - var(--t)) * 40px));
+  opacity: var(--t); pointer-events: none;
+  background: var(--surface); border: 1px solid var(--rule); border-top: 3px solid var(--millie); border-radius: 14px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 16px 40px rgb(0 0 0 / 0.08);
+  padding: 18px 20px 12px;
+}
+.story-visual.has-table .pol { pointer-events: auto; }
+.pol-kicker { margin: 0 0 4px; font: 600 0.68rem/1.3 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--millie); }
+.pol-title { margin: 0 0 10px; font: 500 1.45rem/1.15 var(--serif); }
+.pol table { width: 100%; border-collapse: separate; border-spacing: 0; font: 400 0.84rem/1.35 var(--sans); }
+.pol th, .pol td { border-top: 1px solid var(--rule); }
+.pol tr { opacity: 0; transform: translateY(6px); transition: opacity 300ms ease, transform 300ms ease, background-color 400ms ease; }
+.pol tr.is-on { opacity: 1; transform: none; }
+.pol th { text-align: left; font-weight: 600; color: var(--ink-3); white-space: nowrap; padding: 7px 10px 7px 0; vertical-align: top; }
+.pol td { padding: 7px 8px 7px 0; vertical-align: top; color: var(--ink); }
+.pol td:last-child { padding-right: 0; text-align: right; }
+.pol .pol-src { color: var(--ink-3); font-size: 0.75rem; white-space: nowrap; }
+.story-visual.is-followers .row-followers-pol { background: var(--millie-soft); }
+.story-visual.is-followers .row-followers { background: var(--millie-soft); color: #7d2550; border-radius: 6px; padding: 2px 6px; margin: 4px -6px 0; }
+.story-visual.is-followers .row-followers-pol td, .story-visual.is-followers .row-followers-pol th { color: #7d2550; }
+@media (prefers-reduced-motion: reduce) { .pol tr, .match-tag { transition: none; } }
 .story-card { padding: clamp(12px, 2.6vw, 24px); background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; }
 .story-card h3 { margin: 0 0 8px; font: 600 1.25rem/1.15 var(--serif); }
 .story-card p { margin: 0; }
@@ -325,7 +389,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-vis
   .map-legend { right: 8px; top: 8px; font-size: 0.7rem; padding: 6px 8px; max-width: 11rem; }
   .layer-chart { padding: 12px var(--gutter); }
   .step[data-scene="identity"] { margin-bottom: 14vh; }
-  .story-visual { gap: 8px; font-size: 0.85rem; }
+  .story-visual { font-size: 0.72rem; height: calc(52svh - 24px); --w: 62%; }
+  .story-visual .story-card { opacity: calc(1 - var(--t)); }
+  .pol-feed { display: none; }
+  .pol { top: 50%; transform: translate(-50%, calc(-50% + (1 - var(--t)) * 30px)); }
+  .story-visual .story-card { top: 1.75rem; }
+  .card-pro { transform: translateX(calc((1 - var(--m)) * 26%)) translateY(calc((1 - var(--m)) * 2.5rem)) rotate(calc((1 - var(--m)) * 2deg)); }
+  .card-fit { transform: translateX(calc((1 - var(--m)) * -26%)) rotate(calc((1 - var(--m)) * -2deg)); }
+  .match-tag { font-size: 0.72rem; padding: 6px 10px; top: 1.75rem; }
+  .pol { padding: 10px 12px 6px; }
+  .pol-kicker { font-size: 0.6rem; }
+  .pol-title { font-size: 1.05rem; margin-bottom: 4px; }
+  .pol table { font-size: 0.68rem; }
+  .pol th, .pol td { padding: 3px 6px 3px 0; }
+  .pol .pol-src { display: none; }
+  .pol .badge { font-size: 0.6rem; padding: 2px 6px 2px 4px; }
   .story-visual .story-card { padding: 8px 12px; }
   .story-visual .story-card h3 { margin-bottom: 4px; }
   .story-profile-details { gap: 4px; margin-top: 6px; }

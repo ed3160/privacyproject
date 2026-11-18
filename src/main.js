@@ -97,11 +97,37 @@ const layers = Object.fromEntries(['map', 'routine', 'identity']
 function showLayer(name) {
   for (const [k, el] of Object.entries(layers)) el.classList.toggle('is-active', k === name);
 }
+// Part 4, scroll-linked in four beats, each with a pause:
+//   two separate profiles -> slide together (--m) -> part, shrink and move up (--s)
+//   while the combined "pattern of life" table rises below (--t) -> rows fill in
+const idVisual = document.getElementById('identity-visual');
+const polRows = [...idVisual.querySelectorAll('.pol tr')];
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const smooth = (x) => x * x * (3 - 2 * x);
+const span = (p, a, b) => smooth(clamp01((p - a) / (b - a)));
+function setIdentity(progress, mode) {
+  const p = mode === 'followers' ? 1 : progress;
+  const m = span(p, 0.14, 0.34);           // 0–0.14: hold apart
+  const s = span(p, 0.52, 0.68);           // 0.34–0.52: hold overlapped
+  const t = span(p, 0.6, 0.72);
+  const rows = clamp01((p - 0.7) / 0.2);  // rows fill 0.7–0.9, then hold
+  idVisual.style.setProperty('--m', m.toFixed(3));
+  idVisual.style.setProperty('--s', s.toFixed(3));
+  idVisual.style.setProperty('--t', t.toFixed(3));
+  idVisual.classList.toggle('is-merged', m > 0.97 && s < 0.05);
+  idVisual.classList.toggle('has-table', t > 0);
+  idVisual.classList.toggle('is-followers', mode === 'followers');
+  polRows.forEach((r, i) => r.classList.toggle('is-on', rows >= (i + 1) / (polRows.length + 1) || rows === 1));
+}
 async function enterScene(step, direction) {
   const scene = step.dataset.scene;
   if (!scene) return;
-  if (scene === 'identity') {
+  if (scene.startsWith('identity')) {
     showLayer('identity');
+    readout.hidden = true;
+    if (scene === 'identity-followers') setIdentity(1, 'followers');
+    // reduced motion: no scroll-linked progress, so show the overlap straight away
+    else setIdentity(reduceMotion || direction === 'up' ? 1 : 0, 'match');
     return;
   }
   if (scene.startsWith('routine-')) {
@@ -142,6 +168,10 @@ scroller.setup({ step: '.step[data-scene], .section-head', offset: isMobile() ? 
     enterScene(element, direction);
   })
   .onStepProgress(({ element, progress }) => {
+    if (element.dataset.scene === 'identity-match') {
+      setIdentity(progress, 'match');
+      return;
+    }
     if (element.dataset.scene !== 'run') return;
     const from = +element.dataset.runFrom, to = +element.dataset.runTo;
     mapApi.setProgress(from + (to - from) * progress, onSample);
