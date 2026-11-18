@@ -1,6 +1,7 @@
 import './styles.css';
 import scrollama from 'scrollama';
 import { createMap } from './map.js';
+import { createCover } from './cover.js';
 import { renderBadges, renderClaims, renderSettings, renderReferences, fillEvidence, activityCard } from './content.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -15,6 +16,8 @@ const [claimsDoc, refs, profile, actsDoc, hero, routes, settings] = await Promis
 ]);
 const heroAct = actsDoc.activities.find((a) => a.id === hero.activity_id);
 
+createCover(document.getElementById('cover'), hero, { reduceMotion });
+
 // ---- text-side content ----
 activityCard(document.getElementById('hero-card'), { profile, act: heroAct, routeFeature: routes.features.find((f) => f.properties.id === 'A') });
 renderClaims(claimsDoc.claims, refs);
@@ -22,6 +25,13 @@ renderSettings(settings, refs);
 renderBadges();
 fillEvidence(claimsDoc.evidence);
 renderReferences(refs, document.getElementById('ref-list'));
+// wrap each step's content so it can hold in the middle of the screen while the step scrolls by
+document.querySelectorAll('.step').forEach((step) => {
+  const inner = document.createElement('div');
+  inner.className = 'step-inner';
+  inner.append(...step.childNodes);
+  step.append(inner);
+});
 
 // ---- map ----
 const mapApi = createMap({ container: document.getElementById('map'), hero, routes, activities: actsDoc.activities, reduceMotion });
@@ -103,11 +113,21 @@ async function enterScene(step, direction) {
 }
 
 const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
+const stage = document.querySelector('.stage');
 const scroller = scrollama();
-scroller.setup({ step: '.step[data-scene]', offset: isMobile() ? 0.8 : 0.55, progress: !reduceMotion })
+scroller.setup({ step: '.step[data-scene], .section-head', offset: isMobile() ? 0.8 : 0.5, progress: !reduceMotion })
   .onStepEnter(({ element, direction }) => {
-    document.querySelectorAll('.step.is-active').forEach((s) => s.classList.remove('is-active'));
+    document.querySelectorAll('.step.is-active, .section-head.is-active').forEach((s) => s.classList.remove('is-active'));
     element.classList.add('is-active');
+    // chapter titles: veil the visual so the "Part" heading reads as a break
+    const isChapter = element.classList.contains('section-head');
+    stage.classList.toggle('is-chapter', isChapter);
+    if (isChapter) {
+      // scrolling down into a chapter: get the next scene ready underneath the veil
+      const next = direction === 'down' ? element.parentElement.querySelector(`#${element.id} ~ .step[data-scene]`) : null;
+      if (next) enterScene(next, 'down');
+      return;
+    }
     enterScene(element, direction);
   })
   .onStepProgress(({ element, progress }) => {
