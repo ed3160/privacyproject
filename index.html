@@ -15,17 +15,22 @@
   <header class="hero" id="top">
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="kicker">A data story about fitness apps and privacy</p>
         <h1>This is Millie.<br />She went for a run.</h1>
-        <p class="byline">By Iqra, Rachel &amp; Esha · Privacy in a Networked World · Columbia University / Barnard College</p>
-        <p class="hero-question">
-          Millie posted one run. We wanted to see how much a stranger could figure out about her from it, and what she could do to limit that.
-        </p>
       </div>
       <div class="cover" id="cover"></div>
     </div>
     <p class="scroll-cue" aria-hidden="true">Scroll to follow her <span>↓</span></p>
   </header>
+
+  <section class="intro" id="intro" aria-label="About this project">
+    <div class="intro-inner">
+      <p class="kicker">A data story about fitness apps and privacy</p>
+      <p class="hero-question">
+        Millie is a Barnard student who posts her runs using an app called Strava. Our team was interested in seeing how much information is exposed to a stranger from her usage of the Strava app, and what measures can Millie take in order to protect herself.
+      </p>
+      <p class="byline"><span class="who">Who we are:</span> By Iqra Waheed, Rachel Boroda &amp; Esha Dasari · Privacy in a Networked World · Columbia University / Barnard College</p>
+    </div>
+  </section>
 
   <main id="story">
     <section class="scrolly" aria-label="The story">
@@ -80,16 +85,16 @@
           <span class="badge" data-level="observed"></span>,
           <span class="badge" data-level="inferred"></span> or
           <span class="badge" data-level="unsupported"></span>.
-          <a href="#how-to-read">How we label claims</a>.</p>
+          <button type="button" class="linklike" data-drawer="labels">How we label claims</button>.</p>
           </div>
         </div>
         <div class="step" data-scene="run" data-run-from="0" data-run-to="0.28">
-          <p>It’s Thursday at 7:04 a.m. Millie starts her run on Broadway by Barnard and heads west on 116th Street toward the river. Her watch records her location every second or two. When she saves the run, Strava’s default settings make it visible to <strong>everyone</strong>.</p>
+          <p>It’s Thursday at 7:04 a.m. Millie starts her run on Broadway by Barnard and heads west on 116th Street toward the river. Her watch records her location every second or two <a class="cite" href="#ref-strava-interval">(Strava, n.d.-i)</a>. When she saves the run, Strava’s default settings make it visible to <strong>everyone</strong>.</p>
           <div class="claim-slot" data-claim="run-route"></div>
           <p class="sr-only">Map: Morningside Heights in Manhattan. A dot moves west from Broadway along 116th Street into Riverside Park.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.28" data-run-to="0.5">
-          <p>She goes into Riverside Park and turns north.</p>
+          <p>She goes into Riverside Park and turns north. This is a normal run, and everything on the map is something that Strava will show on her profile when she decides to post this run.</p>
           <p class="sr-only">Map: the dot travels north through Riverside Park, then east along West 122nd Street.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.5" data-run-to="0.75">
@@ -97,7 +102,8 @@
           <p class="sr-only">Map: the dot heads south on Amsterdam Avenue and into Morningside Park.</p>
         </div>
         <div class="step" data-scene="run" data-run-from="0.75" data-run-to="1">
-          <p>She takes the stairs down into Morningside Park, the steepest part of the loop, and finishes back on Broadway: <strong data-ev="hero.distance_km"></strong> km in <strong data-ev="hero.time"></strong>. Next, we look at what a stranger could learn from runs like this one.</p>
+          <p>She takes the stairs down into Morningside Park, the steepest part of the loop, and finishes back on Broadway: <strong data-ev="hero.distance_km"></strong> km in <strong data-ev="hero.time"></strong>.</p>
+          <p class="isolated">Next, we look at what a stranger could learn from runs like this one.</p>
           <p class="sr-only">Map: the completed loop, from Barnard through Riverside Park, Amsterdam Avenue and Morningside Park, back to Broadway.</p>
         </div>
 
@@ -105,6 +111,9 @@
         <div class="section-head" id="home">
           <p class="section-num">2</p>
           <h2>Where she starts and ends</h2>
+        </div>
+        <div class="step step-setting" data-scene="home-first">
+          <aside class="terms" data-terms="home"></aside>
         </div>
         <div class="step" data-scene="home-first">
           <p>On Millie’s first upload, you can see exactly where her run started and ended. Strava only starts hiding the first and last 200 m on activities saved <em>after</em> the first one.</p>
@@ -166,6 +175,14 @@
           <p>She also goes to the same places. Every run goes through Riverside Park or Morningside Park, and she sticks to a few routes.</p>
           <div class="claim-slot" data-claim="routine-places"></div>
         </div>
+        <div class="step" data-scene="routine-cal">
+          <p>Look at what <em>repeating</em> does. One run is a dot on a map. Fifty runs are a pattern, and a year of them is close to a profile. Each new run makes the earlier guesses firmer.</p>
+          <ul class="build-list">
+            <li><strong>Home area:</strong> a single start point could be anywhere. <span data-ev="n_runs"></span> starts on one block are a neighbourhood.</li>
+            <li><strong>Routine:</strong> one Thursday run is a coincidence. <span data-ev="scheduled"></span> runs in the same three time slots are a schedule.</li>
+            <li><strong>Gaps:</strong> a missing week means nothing until you know she almost never misses one. Then the silence says something too.</li>
+          </ul>
+        </div>
         <div class="step step-setting" data-scene="routine-cal">
           <aside class="setting" data-setting="activity-visibility"></aside>
         </div>
@@ -174,20 +191,132 @@
           <h2>Who she is</h2>
         </div>
         <div class="step" data-scene="identity">
-          <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The Brooklyn high school on that profile adds context to the hometown she lists on her fitness profile.</p>
+          <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The high school on that profile is Midwood High School in Brooklyn, New York. It is a real school, and it adds context to the hometown she lists on her fitness profile.</p>
           <p class="sr-only">Professional profile details. High school: <span data-ev="professional.high_school.name"></span>, <span data-ev="professional.high_school.location"></span>. Internships: <span data-ev="professionalExperience"></span>. Skills: <span data-ev="professionalSkills"></span>.</p>
           <div class="claim-slot" data-claim="id-join"></div>
+          <div class="claim-slot" data-claim="id-school-area"></div>
         </div>
         <div class="step" data-scene="identity">
           <p>A follower count also tells you very little about who is in the audience. Millie recognizes most of her followers, and the profiles of the two unfamiliar accounts give her little information.</p>
           <div class="claim-slot" data-claim="id-followers"></div>
           <aside class="setting" data-setting="profile-visibility"></aside>
+</div>
+        <div class="step step-end">
+          <p class="next-up">Each run is a dot. A year of runs is a profile. Next: what Millie would expect from sharing these runs, and what actually happens.</p>
         </div>
       </div>
     </section>
 
-    <section class="prose privacy-summary" id="privacy-settings">
+    <!-- 4. EXPECTATIONS VS REALITY ---------------------------------------->
+    <section class="chapter" id="norms" aria-labelledby="norms-h">
       <p class="section-num">5</p>
+      <h2 id="norms-h">What she’d expect, and what happens</h2>
+      <p class="chapter-lede">Privacy researchers call this <em>contextual integrity</em>: information comes with unwritten rules about where it’s meant to go <a class="cite" href="#ref-nissenbaum2004">(Nissenbaum, 2004)</a>. We can’t know exactly what every Strava user expects, so the left column is our best guess at a reasonable norm. The right column is what the data lets a stranger do.</p>
+
+      <div class="norm">
+        <h3>Where she starts and ends</h3>
+        <div class="norm-cols">
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect in theory</p><p>“I’m sharing where I ran with other runners. It shows my route, not where I live.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">What is exposed in practice</p><p>Run after run starts and ends on the same block. Even with the first and last 200 m hidden, the gap in the track points back to that block.</p></div>
+        </div>
+        <aside class="setting" data-setting="norm-home"></aside>
+      </div>
+
+      <div class="norm">
+        <h3>When she runs</h3>
+        <div class="norm-cols">
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect in theory</p><p>“My workout times are for friends comparing training, not for anyone tracking when I’m out.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">What is exposed in practice</p><p>Timestamps repeat on a weekly rhythm, so a stranger can tell when she’s probably outside, and a gap can show when she’s away.</p></div>
+        </div>
+        <aside class="setting" data-setting="norm-routine"></aside>
+      </div>
+
+      <div class="norm">
+        <h3>Who she is</h3>
+        <div class="norm-cols">
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect in theory</p><p>“No one would care enough about me to go into all of this. So what if someone knows I’m a pre-med from Brooklyn and I attend Barnard College? It’s not like I’m a celebrity.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">What is exposed in practice</p>
+            <p>Knowing your career interests lets someone personalize a scam. A caller can claim to be about a pre-med internship you applied to, or a nearby clinic that is looking for a student like you and just needs a little more information.</p>
+            <ul class="scam-list">
+              <li><strong>Spear phishing.</strong> Instead of generic spam, attackers write emails that mention your exact dream industry or role. If you post about wanting to be a graphic designer or software engineer, you might get a fake email offering an exclusive paid internship or a free software license that actually installs malware.</li>
+              <li><strong>Advance-fee fraud.</strong> Bad actors prey on career ambition by posing as talent scouts, certification boards or industry mentors. They may ask for upfront fees for fake training courses, portfolio reviews or background checks for a job that does not exist.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="setting" data-setting="norm-identity"></aside>
+      </div>
+    </section>
+
+    <!-- 5. PIECES THAT ADD UP ---------------------------------------------->
+    <section class="chapter" id="aggregate" aria-labelledby="agg-h">
+      <p class="section-num">6</p>
+      <h2 id="agg-h">Small facts that add up</h2>
+      <p class="chapter-lede">None of these facts is sensitive by itself. Together they narrow a crowd down to a few people <a class="cite" href="#ref-sweeney2000">(Sweeney, 2000)</a> <a class="cite" href="#ref-ohm2010">(Ohm, 2010)</a>.</p>
+
+      <figure class="funnel" aria-label="Illustrative funnel: each fact shrinks the group of people who could be Millie">
+        <div class="funnel-row" style="--w:100%"><span>Everyone in New York</span></div>
+        <div class="funnel-row" style="--w:62%"><span>…who runs around Morningside Heights</span></div>
+        <div class="funnel-row" style="--w:34%"><span>…and goes to Barnard</span></div>
+        <div class="funnel-row" style="--w:14%"><span>…and graduates in 2027</span></div>
+        <figcaption>Qualitative and not to scale. We did not count how many people fit each step, so we can’t say how small the last group is. We only show the direction: every fact removes people who don’t match.</figcaption>
+      </figure>
+
+      <div class="claim" data-level="inferred"><span class="badge" data-level="inferred"></span>
+        <p class="claim-text">Her area, school and class year point to one person.</p>
+        <p class="claim-ev">Each fact is public on its own page. Together they match fewer people than any one does, though we have not measured how few.</p></div>
+
+      <div class="beat" id="beat">
+        <p class="beat-k">No names needed</p>
+        <p class="beat-body">Say a stranger has no idea who Millie is. They still can read
+          <mark class="hl" style="--d:0ms">when she is usually out of the house, Tuesday and Thursday mornings around seven</mark>,
+          <mark class="hl" style="--d:500ms">where she will be on a Sunday afternoon</mark>,
+          <mark class="hl" style="--d:1000ms">that for about three weeks around New Year’s she wasn’t running</mark>,
+          and <mark class="hl" style="--d:1500ms">that her heart rate hit 181 bpm on the stairs</mark>. That is a schedule, a location and a hint about her body, and nobody has been identified.</p>
+        <p class="beat-foot">Sensitive information can be revealed without anyone being identified. You don’t have to know who someone is to know when they’re not home.</p>
+      </div>
+    </section>
+
+    <!-- 6. CAMERAS ----------------------------------------------------------->
+    <section class="chapter" id="cameras" aria-labelledby="cam-h">
+      <p class="section-num">7</p>
+      <h2 id="cam-h">What public cameras could add</h2>
+      <p class="chapter-lede">Strava data says where a runner was and when. A public camera records who was at a place and when. Put together, they could connect a name and a face to a route.</p>
+
+      <ol class="cam-steps">
+        <li>
+          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="8" y="12" width="36" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M44 20l12-6v20l-12-6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M26 34v8M18 42h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <h3>Cameras exist</h3>
+          <p>Webcams, city and transit cameras and tourist cams already watch public places.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 64 48" aria-hidden="true"><path d="M6 36c10-4 14-18 26-14s14 12 26 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="1 5"/><circle cx="32" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="32" cy="16" r="1.6" fill="currentColor"/><path d="M32 21v6" stroke="currentColor" stroke-width="2.2"/></svg>
+          <h3>A run passes by</h3>
+          <p>Her activity shows a place and a time, such as the block by Barnard at 7:04 a.m.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="24" cy="24" r="12" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M33 33l12 10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="21" r="3" fill="currentColor"/><path d="M18 31c1-4 11-4 12 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <h3>Time + place + camera</h3>
+          <p>A camera covering that spot could show a runner there at that minute.</p>
+        </li>
+      </ol>
+
+      <div class="cam-claims">
+        <div class="claim" data-level="observed"><span class="badge" data-level="observed"></span>
+          <p class="claim-text">Her run’s date, start time and route are public.</p>
+          <p class="claim-ev">On a default-settings activity, anyone can see them.</p></div>
+        <div class="claim" data-level="inferred"><span class="badge" data-level="inferred"></span>
+          <p class="claim-text">A camera covering her usual block could have caught her.</p>
+          <p class="claim-ev">Her runs cluster on one block (Part 2) and follow a weekly schedule (Part 3), so we can guess where she’ll be and when.</p></div>
+        <div class="claim" data-level="unsupported"><span class="badge" data-level="unsupported"></span>
+          <p class="claim-text">A camera frame proves it was her.</p>
+          <p class="claim-ev">Many people pass the same place. A runner on camera at the right minute is a lead, not proof.</p></div>
+      </div>
+      <aside class="setting" data-setting="camera"></aside>
+      <p class="no-demo"><strong>Why there is no demo.</strong> We chose not to show a camera match. Doing it with real footage could help someone target a real person, so we describe it here and leave it out of the site. Our report explains this choice.</p>
+    </section>
+
+    <section class="prose privacy-summary" id="privacy-settings">
+      <p class="section-num">8</p>
       <h2>What you can change</h2>
       <p>Start with the detail you want to share less widely.</p>
       <dl class="levels">
@@ -198,13 +327,22 @@
       </dl>
     </section>
 
-    <section class="prose" id="how-to-read">
-      <h2>How we label claims</h2>
-      <dl class="levels">
-        <div><dt><span class="badge" data-level="observed"></span></dt><dd>Anyone can see this directly on a public page, like someone’s bio.</dd></div>
-        <div><dt><span class="badge" data-level="inferred"></span></dt><dd>We figured this out from things that are observed. We show the evidence, based on our simulated data.</dd></div>
-        <div><dt><span class="badge" data-level="unsupported"></span></dt><dd>It might seem true, but the evidence doesn’t prove it.</dd></div>
-      </dl>
+    <!-- 7. FEEDBACK ---------------------------------------------------------->
+    <section class="chapter feedback" id="feedback" aria-labelledby="fb-h">
+      <p class="section-num">9</p>
+      <h2 id="fb-h">Help us make this clearer</h2>
+      <div class="feedback-grid">
+        <div>
+          <p class="chapter-lede">Tell us what was clear, what surprised you and what we should explain better. It takes about a minute.</p>
+          <p class="fb-note"><strong>How we use your answers.</strong> The form is anonymous. It doesn’t ask for your name or email, and you don’t need to sign in. We use the answers only to improve the clarity of this project, and we report them in aggregate in our final paper.</p>
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeOpjBBc6lKg0OkLnIYY7AhfyJy0TcjLSlUY4lAQo6jPa92lg/viewform" target="_blank" rel="noopener noreferrer">Open the feedback form <span aria-hidden="true">↗</span></a>
+          <p class="fb-small">Opens Google Forms in a new tab.</p>
+        </div>
+        <figure class="qr">
+          <img src="/feedback-qr.png" width="180" height="180" alt="QR code that opens the anonymous feedback form" />
+          <figcaption>Scan to open the form</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="prose" id="references">
@@ -216,6 +354,29 @@
   <footer class="site-footer">
     <p>All people and profiles are fictional. Mockups are our own designs and are not affiliated with Strava. Map data © OpenStreetMap contributors. This site uses no analytics, cookies or trackers.</p>
   </footer>
+
+  <button type="button" class="refs-fab" id="refs-fab" data-drawer="references" aria-label="References" aria-controls="drawer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10.5 5.3 8.2 4.8 4.5 5v13c3.7-.2 6 .3 7.500 1.500M12 6.500c1.500-1.200 3.800-1.700 7.500-1.500v13c-3.700-.2-6 .3-7.500 1.500M12 6.500v13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="fab-tip" aria-hidden="true">References</span>
+  </button>
+  <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-label="Reading guide and references" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="drawer-tabs" role="tablist">
+        <button role="tab" id="tab-labels" data-tab="labels" aria-selected="true">Labels</button>
+        <button role="tab" id="tab-terms" data-tab="terms" aria-selected="false">Terms</button>
+        <button role="tab" id="tab-references" data-tab="references" aria-selected="false">References</button>
+      </div>
+      <button type="button" class="drawer-close" id="drawer-close" aria-label="Close sidebar">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <section role="tabpanel" id="panel-labels" aria-labelledby="tab-labels"></section>
+      <section role="tabpanel" id="panel-terms" aria-labelledby="tab-terms" hidden></section>
+      <section role="tabpanel" id="panel-references" aria-labelledby="tab-references" hidden><ol class="refs" id="drawer-refs"></ol></section>
+    </div>
+  </aside>
 
   <script type="module" src="/src/main.js"></script>
 </body>

@@ -2,7 +2,7 @@ import './styles.css';
 import scrollama from 'scrollama';
 import { createMap } from './map.js';
 import { createCover } from './cover.js';
-import { renderBadges, renderClaims, renderSettings, renderReferences, fillEvidence, activityCard } from './content.js';
+import { renderBadges, renderClaims, renderSettings, renderReferences, renderTerms, renderLabelsPanel, fillEvidence, activityCard } from './content.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const load = (f) => fetch(`${import.meta.env.BASE_URL}data/${f}`).then((r) => {
@@ -23,6 +23,8 @@ createCover(document.getElementById('cover'), hero, { reduceMotion });
 activityCard(document.getElementById('hero-card'), { profile, act: heroAct, routeFeature: routes.features.find((f) => f.properties.id === 'A') });
 renderClaims(claimsDoc.claims, refs);
 renderSettings(settings, refs);
+renderTerms(refs);
+renderLabelsPanel();
 renderBadges();
 fillEvidence({
   ...claimsDoc.evidence, profile, professional,
@@ -31,6 +33,60 @@ fillEvidence({
   followers: { total: followers.length, unrecognized: followers.filter((f) => !f.recognized).length },
 });
 renderReferences(refs, document.getElementById('ref-list'));
+renderReferences(refs, document.getElementById('drawer-refs'), 'dref-');
+
+// ---- sidebar drawer: labels, terms, references ----
+const drawer = document.getElementById('drawer');
+const scrim = document.getElementById('drawer-scrim');
+let lastFocus = null;
+function selectTab(name) {
+  drawer.querySelectorAll('[role=tab]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === name)));
+  drawer.querySelectorAll('[role=tabpanel]').forEach((p) => { p.hidden = p.id !== `panel-${name}`; });
+}
+function openDrawer(tab = 'labels', refKey = null) {
+  if (!drawer.classList.contains('is-open')) lastFocus = document.activeElement;
+  selectTab(tab);
+  drawer.classList.add('is-open');
+  drawer.setAttribute('aria-hidden', 'false');
+  scrim.hidden = false;
+  requestAnimationFrame(() => scrim.classList.add('is-open'));
+  document.getElementById('drawer-close').focus({ preventScroll: true });
+  drawer.querySelectorAll('.is-hit').forEach((li) => li.classList.remove('is-hit'));
+  if (refKey) {
+    const li = document.getElementById(`dref-${refKey}`);
+    if (li) { li.classList.add('is-hit'); li.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' }); }
+  } else {
+    drawer.querySelector('.drawer-body').scrollTop = 0;
+  }
+}
+function closeDrawer() {
+  drawer.classList.remove('is-open');
+  drawer.setAttribute('aria-hidden', 'true');
+  scrim.classList.remove('is-open');
+  setTimeout(() => { if (!drawer.classList.contains('is-open')) scrim.hidden = true; }, 300);
+  lastFocus?.focus?.({ preventScroll: true });
+}
+document.addEventListener('click', (e) => {
+  const cite = e.target.closest('a.cite');
+  if (cite && cite.getAttribute('href')?.startsWith('#ref-')) {
+    e.preventDefault();
+    openDrawer('references', cite.getAttribute('href').slice(5));
+    return;
+  }
+  const opener = e.target.closest('[data-drawer]');
+  if (opener) { openDrawer(opener.dataset.drawer); return; }
+  const tab = e.target.closest('#drawer [role=tab]');
+  if (tab) { selectTab(tab.dataset.tab); return; }
+  if (e.target.closest('#drawer-close') || e.target === scrim) closeDrawer();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) closeDrawer(); });
+
+// ---- highlighter effect ----
+const beat = document.getElementById('beat');
+if (reduceMotion) beat.classList.add('is-marked');
+else new IntersectionObserver((entries, obs) => {
+  if (entries.some((e) => e.isIntersecting)) { beat.classList.add('is-marked'); obs.disconnect(); }
+}, { threshold: 0.6 }).observe(beat);
 // wrap each step's content so it can hold in the middle of the screen while the step scrolls by
 document.querySelectorAll('.step').forEach((step) => {
   const inner = document.createElement('div');

@@ -297,7 +297,7 @@ const proProfile = {
   headline: 'Cognitive Science @ Barnard College | Research Assistant',
   school: 'Barnard College', degree: 'B.A., Cognitive Science', class_year: 2027,
   location: 'New York City Metropolitan Area',
-  high_school: { name: 'Harbor Linden High School', location: 'Brooklyn, NY' },
+  high_school: { name: 'Midwood High School', location: 'Brooklyn, NY' },
   experience: [
     { title: 'Research Intern', org: 'Halverson Lab', dates: 'Jun 2026 – Aug 2026' },
     { title: 'Program Intern', org: 'Linden Arts Center', dates: 'Jun 2025 – Aug 2025' },
@@ -552,6 +552,10 @@ const claims = [
     evidence: `${proProfile.joinable_with_fitness_profile.length} fields match exactly: name and college.`,
     citations: ['nissenbaum2004', 'sweeney2000', 'ohm2010'], mitigatedBy: ['profile-followers'],
     stillLeaks: 'The professional profile is public on its own, and no Strava setting can change another site.' },
+  { id: 'id-school-area', section: 'identity', level: 'inferred',
+    claim: 'Her high school hints at the neighborhood her parents live in.',
+    evidence: 'Midwood High School is a real public high school in Brooklyn. New York City public high schools often give priority to students who live in the school’s zone, so naming it narrows down where her family likely lives. Some students enter through application programs, so it is a hint, not proof.',
+    citations: [], mitigatedBy: [], stillLeaks: 'Not a Strava setting. The professional profile has its own visibility controls.' },
   { id: 'id-career', section: 'identity', level: 'observed',
     claim: 'Her major, high school, internships and skills.',
     evidence: 'Listed on the (fictional) professional profile, which anyone with a free account can view.',
@@ -623,6 +627,7 @@ const references = [
   { key: 'strava-activity', apa: 'Strava. (n.d.-f). How do my activity privacy controls work on Strava? Strava Support.', url: 'https://support.strava.com/en-us/articles/15401987-activity-privacy-controls', added: true },
   { key: 'strava-heatmap', apa: 'Strava. (n.d.-g). What are the Global Heatmap and Strava Metro? Strava Support.', url: 'https://support.strava.com/en-us/articles/15401880-the-global-heatmap-and-strava-metro', added: true },
   { key: 'strava-hidden', apa: 'Strava. (n.d.-h). How do I hide details from my activities on Strava? Strava Support.', url: 'https://support.strava.com/en-us/articles/15401769-how-do-i-hide-details-from-my-activities-on-strava', added: true },
+  { key: 'strava-interval', apa: 'Strava. (n.d.-i). Segment matching issues. Strava Support.', url: 'https://support.strava.com/hc/en-us/articles/216918187-Segment-Matching-Issues', added: true },
   { key: 'sweeney2000', apa: 'Sweeney, L. (2000). Simple demographics often identify people uniquely (Data Privacy Working Paper 3). Carnegie Mellon University.', url: null },
   { key: 'tryterra2026', apa: 'TryTerra. (2026). Strava API changes in 2026: Can developers still get access?', url: 'https://tryterra.co/blog/strava-api-changes-2026' },
 ];
