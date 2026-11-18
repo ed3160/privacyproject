@@ -60,7 +60,7 @@
           <span class="badge" data-level="observed"></span>,
           <span class="badge" data-level="inferred"></span> or
           <span class="badge" data-level="unsupported"></span>.
-          <a href="#how-to-read">How we label claims</a>.</p>
+          <button type="button" class="linklike" data-drawer="labels">How we label claims</button>.</p>
           </div>
         </div>
         <div class="step" data-scene="run" data-run-from="0" data-run-to="0.28">
@@ -85,6 +85,9 @@
         <div class="section-head" id="home">
           <p class="section-num">2</p>
           <h2>Where she starts and ends</h2>
+        </div>
+        <div class="step step-setting" data-scene="home-first">
+          <aside class="terms" data-terms="home"></aside>
         </div>
         <div class="step" data-scene="home-first">
           <p>On Millie’s first upload, you can see exactly where her run started and ended. Strava only starts hiding the first and last 200 m on activities saved <em>after</em> the first one.</p>
@@ -146,22 +149,141 @@
           <p>She also goes to the same places. Every run goes through Riverside Park or Morningside Park, and she sticks to a few routes.</p>
           <div class="claim-slot" data-claim="routine-places"></div>
         </div>
+        <div class="step" data-scene="routine-cal">
+          <p>Look at what <em>repeating</em> does. One run is a dot on a map. Fifty runs are a pattern, and a year of them is close to a profile. Each new run makes the earlier guesses firmer.</p>
+          <ul class="build-list">
+            <li><strong>Home area:</strong> a single start point could be anywhere. <span data-ev="n_runs"></span> starts on one block are a neighbourhood.</li>
+            <li><strong>Routine:</strong> one Thursday run is a coincidence. <span data-ev="scheduled"></span> runs in the same three time slots are a schedule.</li>
+            <li><strong>Gaps:</strong> a missing week means nothing until you know she almost never misses one. Then the silence says something too.</li>
+          </ul>
+        </div>
         <div class="step step-setting" data-scene="routine-cal">
           <aside class="setting" data-setting="activity-visibility"></aside>
         </div>
         <div class="step step-end">
-          <p class="next-up">Coming next: what her profile says about her, what her fitness data shows, and which settings you can change. <em>(In progress.)</em></p>
+          <p class="next-up">Each run is a dot. A year of runs is a profile. Next: what Millie would expect from sharing these runs, and what actually happens.</p>
         </div>
       </div>
     </section>
 
-    <section class="prose" id="how-to-read">
-      <h2>How we label claims</h2>
-      <dl class="levels">
-        <div><dt><span class="badge" data-level="observed"></span></dt><dd>Anyone can see this directly on a public page, like someone’s bio.</dd></div>
-        <div><dt><span class="badge" data-level="inferred"></span></dt><dd>We figured this out from things that are observed. We show the evidence, based on our simulated data.</dd></div>
-        <div><dt><span class="badge" data-level="unsupported"></span></dt><dd>It might seem true, but the evidence doesn’t prove it.</dd></div>
-      </dl>
+    <!-- 4. EXPECTATIONS VS REALITY ---------------------------------------->
+    <section class="chapter" id="norms" aria-labelledby="norms-h">
+      <p class="section-num">4</p>
+      <h2 id="norms-h">What she’d expect, and what happens</h2>
+      <p class="chapter-lede">Privacy researchers call this <em>contextual integrity</em>: information comes with unwritten rules about where it’s meant to go <a class="cite" href="#ref-nissenbaum2004">(Nissenbaum, 2004)</a>. We can’t know exactly what every Strava user expects, so the left column is our best guess at a reasonable norm. The right column is what the data lets a stranger do.</p>
+
+      <div class="norm">
+        <h3>Where she starts and ends</h3>
+        <div class="norm-cols">
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect</p><p>“I’m sharing where I ran with other runners. It shows my route, not where I live.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">How that breaks</p><p>Run after run starts and ends on the same block. Even with the first and last 200 m hidden, the gap in the track points back to that block.</p></div>
+        </div>
+        <aside class="setting" data-setting="norm-home"></aside>
+      </div>
+
+      <div class="norm">
+        <h3>When she runs</h3>
+        <div class="norm-cols">
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect</p><p>“My workout times are for friends comparing training, not for anyone tracking when I’m out.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">How that breaks</p><p>Timestamps repeat on a weekly rhythm, so a stranger can tell when she’s probably outside, and a gap can show when she’s away.</p></div>
+        </div>
+        <aside class="setting" data-setting="norm-routine"></aside>
+      </div>
+
+      <div class="norm">
+        <h3>Who she is</h3>
+        <div class="norm-cols">
+          <div class="norm-col norm-expect"><p class="norm-k">What a runner would expect</p><p>“A fitness profile stays in a fitness context. Nobody should be able to connect it to my school or my career.”</p></div>
+          <div class="norm-col norm-break"><p class="norm-k">How that breaks</p><p>A public bio that names her school and year, plus a neighbourhood she runs in every week, is enough to link her fitness profile to other pages about her.</p></div>
+        </div>
+        <aside class="setting" data-setting="norm-identity"></aside>
+      </div>
+    </section>
+
+    <!-- 5. PIECES THAT ADD UP ---------------------------------------------->
+    <section class="chapter" id="aggregate" aria-labelledby="agg-h">
+      <p class="section-num">5</p>
+      <h2 id="agg-h">Small facts that add up</h2>
+      <p class="chapter-lede">None of these facts is sensitive by itself. Together they narrow a crowd down to a few people <a class="cite" href="#ref-sweeney2000">(Sweeney, 2000)</a> <a class="cite" href="#ref-ohm2010">(Ohm, 2010)</a>.</p>
+
+      <figure class="funnel" aria-label="Illustrative funnel: each fact shrinks the group of people who could be Millie">
+        <div class="funnel-row" style="--w:100%"><span>Everyone in New York</span></div>
+        <div class="funnel-row" style="--w:62%"><span>…who runs around Morningside Heights</span></div>
+        <div class="funnel-row" style="--w:34%"><span>…and goes to Barnard</span></div>
+        <div class="funnel-row" style="--w:14%"><span>…and graduates in 2027</span></div>
+        <figcaption>Qualitative and not to scale. We did not count how many people fit each step, so we can’t say how small the last group is. We only show the direction: every fact removes people who don’t match.</figcaption>
+      </figure>
+
+      <div class="claim" data-level="inferred"><span class="badge" data-level="inferred"></span>
+        <p class="claim-text">Her area, school and class year point to one person.</p>
+        <p class="claim-ev">Each fact is public on its own page. Together they match fewer people than any one does, though we have not measured how few.</p></div>
+
+      <div class="beat" id="beat">
+        <p class="beat-k">No names needed</p>
+        <p class="beat-body">Say a stranger has no idea who Millie is. They still can read
+          <mark class="hl" style="--d:0ms">when she is usually out of the house, Tuesday and Thursday mornings around seven</mark>,
+          <mark class="hl" style="--d:500ms">where she will be on a Sunday afternoon</mark>,
+          <mark class="hl" style="--d:1000ms">that for about three weeks around New Year’s she wasn’t running</mark>,
+          and <mark class="hl" style="--d:1500ms">that her heart rate hit 181 bpm on the stairs</mark>. That is a schedule, a location and a hint about her body, and nobody has been identified.</p>
+        <p class="beat-foot">Sensitive information can be revealed without anyone being identified. You don’t have to know who someone is to know when they’re not home.</p>
+      </div>
+    </section>
+
+    <!-- 6. CAMERAS ----------------------------------------------------------->
+    <section class="chapter" id="cameras" aria-labelledby="cam-h">
+      <p class="section-num">6</p>
+      <h2 id="cam-h">What public cameras could add</h2>
+      <p class="chapter-lede">Strava data says where a runner was and when. A public camera records who was at a place and when. Put together, they could connect a name and a face to a route.</p>
+
+      <ol class="cam-steps">
+        <li>
+          <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="8" y="12" width="36" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M44 20l12-6v20l-12-6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M26 34v8M18 42h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <h3>Cameras exist</h3>
+          <p>Webcams, city and transit cameras and tourist cams already watch public places.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 64 48" aria-hidden="true"><path d="M6 36c10-4 14-18 26-14s14 12 26 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="1 5"/><circle cx="32" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="32" cy="16" r="1.6" fill="currentColor"/><path d="M32 21v6" stroke="currentColor" stroke-width="2.2"/></svg>
+          <h3>A run passes by</h3>
+          <p>Her activity shows a place and a time, such as the block by Barnard at 7:04 a.m.</p>
+        </li>
+        <li>
+          <svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="24" cy="24" r="12" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M33 33l12 10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="24" cy="21" r="3" fill="currentColor"/><path d="M18 31c1-4 11-4 12 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <h3>Time + place + camera</h3>
+          <p>A camera covering that spot could show a runner there at that minute.</p>
+        </li>
+      </ol>
+
+      <div class="cam-claims">
+        <div class="claim" data-level="observed"><span class="badge" data-level="observed"></span>
+          <p class="claim-text">Her run’s date, start time and route are public.</p>
+          <p class="claim-ev">On a default-settings activity, anyone can see them.</p></div>
+        <div class="claim" data-level="inferred"><span class="badge" data-level="inferred"></span>
+          <p class="claim-text">A camera covering her usual block could have caught her.</p>
+          <p class="claim-ev">Her runs cluster on one block (Part 2) and follow a weekly schedule (Part 3), so we can guess where she’ll be and when.</p></div>
+        <div class="claim" data-level="unsupported"><span class="badge" data-level="unsupported"></span>
+          <p class="claim-text">A camera frame proves it was her.</p>
+          <p class="claim-ev">Many people pass the same place. A runner on camera at the right minute is a lead, not proof.</p></div>
+      </div>
+      <aside class="setting" data-setting="camera"></aside>
+      <p class="no-demo"><strong>Why there is no demo.</strong> We chose not to show a camera match. Doing it with real footage could help someone target a real person, so we describe it here and leave it out of the site. Our report explains this choice.</p>
+    </section>
+
+    <!-- 7. FEEDBACK ---------------------------------------------------------->
+    <section class="chapter feedback" id="feedback" aria-labelledby="fb-h">
+      <p class="section-num">7</p>
+      <h2 id="fb-h">Help us make this clearer</h2>
+      <div class="feedback-grid">
+        <div>
+          <p class="chapter-lede">Tell us what was clear, what surprised you and what we should explain better. It takes about a minute.</p>
+          <p class="fb-note"><strong>How we use your answers.</strong> The form is anonymous. It doesn’t ask for your name or email, and you don’t need to sign in. We use the answers only to improve the clarity of this project, and we report them in aggregate in our final paper.</p>
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeOpjBBc6lKg0OkLnIYY7AhfyJy0TcjLSlUY4lAQo6jPa92lg/viewform" target="_blank" rel="noopener noreferrer">Open the feedback form <span aria-hidden="true">↗</span></a>
+          <p class="fb-small">Opens Google Forms in a new tab.</p>
+        </div>
+        <figure class="qr">
+          <img src="/feedback-qr.svg" width="180" height="180" alt="QR code that opens the anonymous feedback form" />
+          <figcaption>Scan to open the form</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="prose" id="references">
@@ -173,6 +295,29 @@
   <footer class="site-footer">
     <p>All people and profiles are fictional. Mockups are our own designs and are not affiliated with Strava or LinkedIn. Map data © OpenStreetMap contributors. This site uses no analytics, cookies or trackers.</p>
   </footer>
+
+  <button type="button" class="refs-fab" id="refs-fab" data-drawer="references" aria-label="References" aria-controls="drawer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5C10.5 5.3 8.2 4.8 4.5 5v13c3.7-.2 6 .3 7.500 1.500M12 6.500c1.500-1.200 3.800-1.700 7.500-1.500v13c-3.700-.2-6 .3-7.500 1.500M12 6.500v13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="fab-tip" aria-hidden="true">References</span>
+  </button>
+  <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-label="Reading guide and references" aria-hidden="true">
+    <div class="drawer-head">
+      <div class="drawer-tabs" role="tablist">
+        <button role="tab" id="tab-labels" data-tab="labels" aria-selected="true">Labels</button>
+        <button role="tab" id="tab-terms" data-tab="terms" aria-selected="false">Terms</button>
+        <button role="tab" id="tab-references" data-tab="references" aria-selected="false">References</button>
+      </div>
+      <button type="button" class="drawer-close" id="drawer-close" aria-label="Close sidebar">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <section role="tabpanel" id="panel-labels" aria-labelledby="tab-labels"></section>
+      <section role="tabpanel" id="panel-terms" aria-labelledby="tab-terms" hidden></section>
+      <section role="tabpanel" id="panel-references" aria-labelledby="tab-references" hidden><ol class="refs" id="drawer-refs"></ol></section>
+    </div>
+  </aside>
 
   <script type="module" src="/src/main.js"></script>
 </body>
