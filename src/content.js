@@ -68,6 +68,9 @@ const SETTINGS_COPY = {
     <p><strong>Activity visibility → Followers or Only You.</strong> <span class="tag-default">Default: Everyone</span></p>
     <p>Followers still see everything. With a profile set to Everyone (also the default), anyone can follow without approval.${cite(['strava-defaults', 'strava-profile', 'strava-activity'])}</p>
     <p><strong>Hidden details → start time</strong> hides the clock time, but the date and weekday remain.${cite(['strava-hidden'])}</p>`,
+  'profile-visibility': (s, cite) => `
+    <p><strong>Profile Page → Followers.</strong></p>
+    <p>New followers need approval. Review existing followers separately. Some profile details, including the bio, can still be visible to other Strava users.${cite(['strava-profile'])}</p>`,
 };
 export function renderSettings(settings, refs, root = document) {
   const cite = (keys) => citeLinks(keys, refs);

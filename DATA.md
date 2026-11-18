@@ -87,9 +87,9 @@ Run 1 is tagged `first-upload-unhidden`. Strava says the 200 m default is applie
 
 ### `profile.json`, `followers.json` and `pro-profile.json` (profiles)
 
-- **Fitness profile** (all defaults): "Millie Tamsworth", Barnard College, class of 2027, hometown Brooklyn NY, short bio, initials avatar ("MT"), profile and activity visibility **Everyone**.
+- **Fitness profile** (all defaults): "Millie Bear", Barnard College, hometown Brooklyn NY, short bio, initials avatar ("MB"), profile and activity visibility **Everyone**.
 - **Followers:** 10 people, all invented. Eight are friends and family; two are accounts she doesn't recognize (`athlete_80412`, "R. K."). All avatars are initials.
-- **Professional profile** (fictional, generic "professional networking" mockup): B.A. Cognitive Science, class of 2027, one invented internship (Halverson Center for Learning & Memory, fictional), one invented club. It shares exactly **three joinable fields** with the fitness profile: name, school and class year.
+- **Professional profile** (fictional, generic "professional networking" mockup) lists B.A. Cognitive Science, class of 2027, a fictional Brooklyn high school, two internships, skills and a club. It shares two exact fields with the fitness profile, name and college.
 
 ### `settings-defaults.json`
 

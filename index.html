@@ -46,6 +46,26 @@
             <div id="routine-cal"></div>
           </div>
         </div>
+        <div class="layer layer-chart" id="layer-identity">
+          <div class="story-visual">
+            <div class="story-card">
+              <h3>Fitness profile</h3>
+              <p class="story-match"><span data-ev="profile.display_name"></span><br><span data-ev="profile.school"></span></p>
+              <p data-ev="profile.hometown"></p>
+              <p><span data-ev="followers.total"></span> followers · <span data-ev="followers.unrecognized"></span> unfamiliar to Millie</p>
+            </div>
+            <div class="story-card">
+              <h3>Professional profile</h3>
+              <p class="story-match"><span data-ev="professional.name"></span><br><span data-ev="professional.school"></span> · Class of <span data-ev="professional.class_year"></span></p>
+              <p data-ev="professional.degree"></p>
+              <dl class="story-profile-details">
+                <div><dt>High school</dt><dd><span data-ev="professional.high_school.name"></span> · <span data-ev="professional.high_school.location"></span></dd></div>
+                <div><dt>Internships</dt><dd data-ev="professionalExperience"></dd></div>
+                <div><dt>Skills</dt><dd data-ev="professionalSkills"></dd></div>
+              </dl>
+            </div>
+          </div>
+        </div>
       </figure>
 
       <div class="steps">
@@ -149,10 +169,33 @@
         <div class="step step-setting" data-scene="routine-cal">
           <aside class="setting" data-setting="activity-visibility"></aside>
         </div>
-        <div class="step step-end">
-          <p class="next-up">Coming next: what her profile says about her, what her fitness data shows, and which settings you can change. <em>(In progress.)</em></p>
+        <div class="section-head" id="identity">
+          <p class="section-num">4</p>
+          <h2>Who she is</h2>
+        </div>
+        <div class="step" data-scene="identity">
+          <p>The activity leads back to Millie’s fictional fitness profile. Her name and college also appear on a fictional professional profile, alongside her degree in cognitive science, internships and skills. The Brooklyn high school on that profile adds context to the hometown she lists on her fitness profile.</p>
+          <p class="sr-only">Professional profile details. High school: <span data-ev="professional.high_school.name"></span>, <span data-ev="professional.high_school.location"></span>. Internships: <span data-ev="professionalExperience"></span>. Skills: <span data-ev="professionalSkills"></span>.</p>
+          <div class="claim-slot" data-claim="id-join"></div>
+        </div>
+        <div class="step" data-scene="identity">
+          <p>A follower count also tells you very little about who is in the audience. Millie recognizes most of her followers, and the profiles of the two unfamiliar accounts give her little information.</p>
+          <div class="claim-slot" data-claim="id-followers"></div>
+          <aside class="setting" data-setting="profile-visibility"></aside>
         </div>
       </div>
+    </section>
+
+    <section class="prose privacy-summary" id="privacy-settings">
+      <p class="section-num">5</p>
+      <h2>What you can change</h2>
+      <p>Start with the detail you want to share less widely.</p>
+      <dl class="levels">
+        <div><dt>Route endpoints</dt><dd>Use <strong>Map Visibility</strong> to hide endpoints, a nearby address or the entire map. Check older activities individually. <a class="cite" href="#ref-strava-map">Map Visibility</a></dd></div>
+        <div><dt>Routine and activity history</dt><dd>Set <strong>Activity Visibility</strong> to Followers or Only You. Use <strong>Hidden Details</strong> to hide the exact start time. The activity date stays visible to its audience. <a class="cite" href="#ref-strava-activity">Activity Visibility</a> · <a class="cite" href="#ref-strava-hidden">Hidden Details</a></dd></div>
+        <div><dt>Profile and followers</dt><dd>Set <strong>Profile Page</strong> to Followers to approve new requests. Review existing followers and the information visible on your other profiles. <a class="cite" href="#ref-strava-profile">Profile Page</a></dd></div>
+        <div><dt>Heart rate and pace</dt><dd>Choose what to hide under <strong>Hidden Details</strong>. Check older activities separately when you change the defaults. <a class="cite" href="#ref-strava-hidden">Hidden Details</a></dd></div>
+      </dl>
     </section>
 
     <section class="prose" id="how-to-read">
